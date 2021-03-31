@@ -8,5 +8,9 @@
 </head>
 <body>
   <h1>This is login Page</h1>
+  <form action="">
+    <input type="text" name="username" id="username">
+    <input type="password" name="password" id="password">
+  </form>
 </body>
 </html>
