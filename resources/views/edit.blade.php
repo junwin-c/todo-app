@@ -11,6 +11,6 @@
     @csrf
     <input type="text" name="task" value="{{ $data->task }}" >
     <button type="submit">Submit</button>
-  </form>
+</form>
 </body>
 </html>
