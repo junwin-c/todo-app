@@ -17,11 +17,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/todolist/edit/{id}', 'TodoController@parseData');
-Route::post('/todolist/edit/{id}', 'TodoController@edit');
-Route::get('/todolist', 'TodoController@index');
-Route::get('/todolist/{id}', 'TodoController@delete');
-Route::post('/todolist', 'TodoController@submit');
+Route::middleware('auth')->group(function () {
+    Route::get('/todolist/edit/{id}', 'TodoController@parseData');
+    Route::post('/todolist/edit/{id}', 'TodoController@edit');
+    Route::get('/todolist', 'TodoController@index');
+    Route::get('/todolist/{id}', 'TodoController@delete');
+    Route::post('/todolist', 'TodoController@submit');
+});
+
+
 
 Auth::routes();
 
