@@ -22,3 +22,7 @@ Route::post('/todolist/edit/{id}', 'TodoController@edit');
 Route::get('/todolist', 'TodoController@index');
 Route::get('/todolist/{id}', 'TodoController@delete');
 Route::post('/todolist', 'TodoController@submit');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
