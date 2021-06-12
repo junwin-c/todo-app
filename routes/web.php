@@ -1,5 +1,7 @@
 <?php
 
+use GuzzleHttp\Middleware;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,14 +19,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware('auth')->group(function () {
-    Route::get('/todolist/edit/{id}', 'TodoController@parseData');
-    Route::post('/todolist/edit/{id}', 'TodoController@edit');
-    Route::get('/todolist', 'TodoController@index');
-    Route::get('/todolist/{id}', 'TodoController@delete');
-    Route::post('/todolist', 'TodoController@submit');
+Route::group(['prefix' => 'admin'], function () {
+    Route::group(['middleware' => 'auth'], function () {
+        Route::get('/todolist/edit/{id}', 'TodoController@parseData');
+        Route::post('/todolist/edit/{id}', 'TodoController@edit');
+        Route::get('/todolist', 'TodoController@index');
+        Route::get('/todolist/delete/{id}', 'TodoController@delete')->Middleware(['auth', 'password.confirm']);
+        Route::post('/todolist', 'TodoController@submit');
+    });
 });
-
 
 
 Auth::routes();
